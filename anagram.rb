@@ -14,7 +14,7 @@ class Anagram
 				end
 			outputs << ot
 		end
-		outputs.uniq.sort.reverse!
+		outputs.uniq.sort_by!{ |o| o.length }.reverse!
 	end
 
 	def formatted_output
@@ -33,4 +33,20 @@ class Anagram
 	end
 end
 
+def take_inputs
+	puts "Enter words and enter blank to view result"
+	words = []
+	word = gets.chomp
+	terminate_loop = false
+	words << word
+	while(!terminate_loop) do
+		word = gets.chomp
+		terminate_loop = true if word.empty?
+		words << word
+	end
+	words.reject(&:empty?)
+end
+
+output = Anagram.new(take_inputs).formatted_output
+puts output
 
